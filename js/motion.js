@@ -15,11 +15,99 @@
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   document.addEventListener('DOMContentLoaded', () => {
-    initPageLoadMotion();
+    initSiteIntro();
     initScrollRevealObserver();
     initStickyHeaderScroll();
     initModalTransitions();
   });
+
+  /* ==========================================================================
+     0. SITE INTRO ANIMATION (3 to 4s Animated Intro matching Neo-Retro theme)
+     ========================================================================== */
+  function initSiteIntro() {
+    const overlay = document.getElementById('site-intro-overlay');
+    if (!overlay) {
+      initPageLoadMotion();
+      return;
+    }
+
+    if (prefersReducedMotion) {
+      overlay.style.display = 'none';
+      initPageLoadMotion();
+      return;
+    }
+
+    const skipBtn = document.getElementById('intro-skip-btn');
+    const counterEl = document.getElementById('intro-counter-number');
+    const progressFill = document.getElementById('intro-progress-fill');
+    const statusEl = document.getElementById('intro-status-phrase');
+    const replayBtn = document.getElementById('replay-intro-btn');
+
+    let isDismissed = false;
+    let animFrameId = null;
+    const totalDuration = 3400; // 3.4s runtime (comfortably within 3 to 4 seconds)
+    let startTime = performance.now();
+
+    const stages = [
+      { at: 0, text: 'Initializing Design Archive...' },
+      { at: 750, text: 'Curating Brand Systems...' },
+      { at: 1600, text: 'Loading Tamil–English Typography...' },
+      { at: 2450, text: 'System Calibrated // Ready' }
+    ];
+
+    function dismissIntro() {
+      if (isDismissed) return;
+      isDismissed = true;
+      if (animFrameId) cancelAnimationFrame(animFrameId);
+
+      overlay.classList.add('intro-hidden');
+
+      // Trigger hero entrance right as curtain lifts
+      setTimeout(() => {
+        initPageLoadMotion();
+      }, 150);
+
+      setTimeout(() => {
+        overlay.style.display = 'none';
+      }, 700);
+    }
+
+    function loop(now) {
+      if (isDismissed) return;
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / (totalDuration - 500), 1);
+      const percent = Math.round(progress * 100);
+
+      if (counterEl) counterEl.textContent = `${percent.toString().padStart(2, '0')}%`;
+      if (progressFill) progressFill.style.width = `${percent}%`;
+
+      const currentStage = stages.slice().reverse().find(s => elapsed >= s.at);
+      if (currentStage && statusEl && statusEl.textContent !== currentStage.text) {
+        statusEl.textContent = currentStage.text;
+      }
+
+      if (elapsed >= totalDuration) {
+        dismissIntro();
+      } else {
+        animFrameId = requestAnimationFrame(loop);
+      }
+    }
+
+    animFrameId = requestAnimationFrame(loop);
+
+    if (skipBtn) {
+      skipBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        dismissIntro();
+      });
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !isDismissed) {
+        dismissIntro();
+      }
+    });
+  }
 
   /* ==========================================================================
      1. PAGE LOAD ANIMATIONS (Plays once on first paint, total intro < 800ms)
@@ -50,12 +138,12 @@
       }
 
       // Reveal Hero Portrait (slow fade, no movement)
-      const heroImage = document.querySelector('.hero-visual-col .motion-image');
-      if (heroImage) {
+      const heroImages = document.querySelectorAll('.hero-visual-col .motion-image');
+      heroImages.forEach((heroImage, index) => {
         setTimeout(() => {
           heroImage.classList.add('is-revealed');
-        }, 140);
-      }
+        }, 140 + index * 40);
+      });
     });
   }
 

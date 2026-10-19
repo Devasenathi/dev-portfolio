@@ -7,15 +7,372 @@
   <meta name="description" content="Portfolio of Deva, a graphic designer who makes brands that feel local and look sharp. Visual Communication student based in Coimbatore.">
   
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/style.css?v=20261019_v4">
+  
+  <!-- Critical Intro Styling (guarantees instant zero-flicker render on load) -->
+  <style>
+    .site-intro-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background-color: #202022;
+      background-image: 
+        radial-gradient(rgba(255, 255, 255, 0.08) 1.5px, transparent 1.5px),
+        linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+      background-size: 24px 24px, 48px 48px, 48px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      will-change: transform, opacity;
+      transition: transform 0.65s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.5s ease;
+    }
+    .site-intro-overlay.intro-hidden {
+      transform: translateY(-100%);
+      pointer-events: none;
+    }
+    .intro-curtain {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      max-width: 920px;
+      max-height: 640px;
+      margin: auto;
+      padding: clamp(1.25rem, 4vw, 2.5rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-sizing: border-box;
+    }
+    .intro-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      z-index: 10;
+    }
+    .intro-pill-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: rgba(255, 255, 255, 0.08);
+      border: 1.5px solid rgba(255, 255, 255, 0.22);
+      border-radius: 9999px;
+      padding: 0.35rem 0.85rem;
+      font-family: 'Space Mono', Consolas, monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      color: #EAEAEA;
+    }
+    .intro-pulse-dot {
+      width: 8px;
+      height: 8px;
+      background-color: #FFB914;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #FFB914;
+      animation: pulseDot 1s infinite alternate;
+    }
+    @keyframes pulseDot {
+      0% { transform: scale(0.8); opacity: 0.7; }
+      100% { transform: scale(1.2); opacity: 1; }
+    }
+    .intro-skip-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+      border: 1.5px solid rgba(255, 255, 255, 0.3);
+      color: #CCCCCC;
+      font-family: 'Space Mono', Consolas, monospace;
+      font-size: 0.75rem;
+      padding: 0.4rem 0.85rem;
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .intro-skip-btn kbd {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 4px;
+      padding: 0.1rem 0.35rem;
+      font-size: 0.65rem;
+      color: #FFFFFF;
+    }
+    .intro-skip-btn:hover {
+      background: #FFB914;
+      color: #333333;
+      border-color: #FFB914;
+      transform: translateY(-1px);
+    }
+    .intro-skip-btn:hover kbd {
+      background: #333333;
+      color: #FFFFFF;
+    }
+    .intro-center-card {
+      position: relative;
+      background: #FFFFFF;
+      border: 3px solid #333333;
+      border-radius: 28px;
+      padding: clamp(1.75rem, 4.5vw, 3rem) clamp(1.5rem, 4.5vw, 2.75rem);
+      box-shadow: 10px 10px 0 #FFB914, 10px 10px 0 3px #333333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin: auto 0;
+      transform: scale(0.96);
+      opacity: 0;
+      animation: introCardEntrance 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+    }
+    @keyframes introCardEntrance {
+      0% { transform: scale(0.9) translateY(20px); opacity: 0; }
+      100% { transform: scale(1) translateY(0); opacity: 1; }
+    }
+    .intro-corner-mark {
+      position: absolute;
+      font-family: 'Space Mono', Consolas, monospace;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #333333;
+      line-height: 1;
+    }
+    .intro-corner-mark.top-left { top: 12px; left: 14px; }
+    .intro-corner-mark.top-right { top: 12px; right: 14px; }
+    .intro-corner-mark.bottom-left { bottom: 12px; left: 14px; }
+    .intro-corner-mark.bottom-right { bottom: 12px; right: 14px; }
+    .intro-brand-wrapper {
+      position: relative;
+      margin-bottom: 1rem;
+    }
+    .intro-monogram {
+      width: 66px;
+      height: 66px;
+      background-color: #FFB914;
+      color: #333333;
+      border: 2.5px solid #333333;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Lilita One', 'Fredoka', cursive, sans-serif;
+      font-size: 2.2rem;
+      box-shadow: 4px 4px 0 #333333;
+      animation: introMonogramPop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
+    }
+    @keyframes introMonogramPop {
+      0% { transform: scale(0) rotate(-20deg); }
+      60% { transform: scale(1.15) rotate(4deg); }
+      100% { transform: scale(1) rotate(0deg); }
+    }
+    .intro-sparkle {
+      position: absolute;
+      top: -8px;
+      right: -12px;
+      color: #FFB914;
+      font-size: 1.6rem;
+      filter: drop-shadow(1px 1px 0 #333333);
+      animation: introSparkleSpin 3s linear infinite;
+    }
+    @keyframes introSparkleSpin {
+      0% { transform: rotate(0deg) scale(0.9); }
+      50% { transform: rotate(180deg) scale(1.2); }
+      100% { transform: rotate(360deg) scale(0.9); }
+    }
+    .intro-subtitle {
+      display: inline-block;
+      font-family: 'Space Mono', Consolas, monospace;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: #17118B;
+      margin-bottom: 0.4rem;
+      background: rgba(23, 17, 139, 0.12);
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+    }
+    .intro-main-title {
+      font-family: 'Lilita One', 'Fredoka', cursive, sans-serif;
+      font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+      line-height: 1.05;
+      color: #333333;
+      margin: 0.25rem 0 0.6rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.4rem clamp(0.4rem, 1.2vw, 0.8rem);
+    }
+    .intro-highlight-text {
+      position: relative;
+      color: #333333;
+      z-index: 1;
+    }
+    .intro-highlight-text::before {
+      content: '';
+      position: absolute;
+      left: -4px;
+      right: -4px;
+      bottom: 6px;
+      height: 48%;
+      background-color: #FFB914;
+      z-index: -1;
+      border-radius: 4px;
+      transform: skewX(-6deg);
+      animation: introHighlightSweep 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
+    }
+    @keyframes introHighlightSweep {
+      0% { width: 0; opacity: 0; }
+      100% { width: calc(100% + 8px); opacity: 1; }
+    }
+    .intro-designer-name {
+      font-family: 'Fredoka', 'Lilita One', sans-serif;
+      font-size: clamp(0.85rem, 1.8vw, 1rem);
+      color: #5A5A5A;
+      font-weight: 600;
+      margin: 0 0 1.25rem;
+    }
+    .intro-progress-box {
+      width: 100%;
+      max-width: 400px;
+      margin-top: 0.25rem;
+    }
+    .intro-progress-labels {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'Space Mono', Consolas, monospace;
+      font-size: 0.76rem;
+      color: #333333;
+      font-weight: 700;
+      margin-bottom: 0.45rem;
+    }
+    .intro-status-phrase {
+      color: #17118B;
+    }
+    .intro-counter-number {
+      font-variant-numeric: tabular-nums;
+      background: #FFB914;
+      padding: 0.15rem 0.5rem;
+      border: 1px solid #333333;
+      border-radius: 6px;
+      box-shadow: 2px 2px 0 #333333;
+    }
+    .intro-progress-track {
+      width: 100%;
+      height: 12px;
+      background-color: #EAEAEA;
+      border: 2px solid #333333;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 3px 3px 0 #333333;
+    }
+    .intro-progress-fill {
+      width: 0%;
+      height: 100%;
+      background-color: #FFB914;
+      background-image: repeating-linear-gradient(
+        -45deg,
+        rgba(0, 0, 0, 0.12),
+        rgba(0, 0, 0, 0.12) 8px,
+        transparent 8px,
+        transparent 16px
+      );
+      background-size: 200% 100%;
+      animation: introStripes 1s linear infinite;
+      transition: width 0.08s linear;
+    }
+    @keyframes introStripes {
+      0% { background-position: 0 0; }
+      100% { background-position: 32px 0; }
+    }
+    .intro-bottom-tape {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.85rem;
+      flex-wrap: wrap;
+      font-family: 'Space Mono', Consolas, monospace;
+      font-size: 0.72rem;
+      color: #999999;
+      letter-spacing: 0.06em;
+      padding-top: 0.75rem;
+    }
+  </style>
   
   <!-- Motion Script (Defer, quiet and minimal system) -->
-  <script src="./js/motion.js" defer></script>
+  <script src="./js/motion.js?v=20261019_v4" defer></script>
   
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%23FFB914'/><text x='50%' y='68%' font-family='sans-serif' font-weight='900' font-size='56' fill='%23333333' text-anchor='middle'>D</text></svg>">
 </head>
 <body>
+
+  <!-- ====================================================================
+       SITE INTRO OVERLAY (3 to 4 Second Animated Neo-Retro Intro)
+       ==================================================================== -->
+  <aside id="site-intro-overlay" class="site-intro-overlay" aria-label="Portfolio Introduction">
+    <div class="intro-curtain">
+      
+      <!-- Top Bar: Stamp & Skip Button -->
+      <div class="intro-topbar">
+        <div class="intro-pill-badge">
+          <span class="intro-pulse-dot"></span>
+          <span>DEVASENATHIPATHI M // ARCHIVE 2026</span>
+        </div>
+        <button type="button" id="intro-skip-btn" class="intro-skip-btn" aria-label="Skip Introduction">
+          <span>Skip</span>
+          <kbd>ESC</kbd>
+          <span class="intro-arrow">&rarr;</span>
+        </button>
+      </div>
+
+      <!-- Center Editorial Showcase Card -->
+      <div class="intro-center-card">
+        <!-- Corner Registration Marks -->
+        <span class="intro-corner-mark top-left">+</span>
+        <span class="intro-corner-mark top-right">+</span>
+        <span class="intro-corner-mark bottom-left">+</span>
+        <span class="intro-corner-mark bottom-right">+</span>
+
+        <!-- Monogram Pop -->
+        <div class="intro-brand-wrapper">
+          <div class="intro-monogram">D</div>
+          <span class="intro-sparkle">&#10022;</span>
+        </div>
+
+        <!-- Chunky Kinetic Title -->
+        <div class="intro-text-block">
+          <span class="intro-subtitle">PORTFOLIO &bull; VISUAL IDENTITY</span>
+          <h1 class="intro-main-title">
+            <span>GRAPHIC</span>
+            <span class="intro-highlight-text">DESIGNER.</span>
+          </h1>
+          <p class="intro-designer-name">Devasenathipathi M &bull; Brand &bull; Typography &bull; Systems</p>
+        </div>
+
+        <!-- Neo-Retro Progress Gauge -->
+        <div class="intro-progress-box">
+          <div class="intro-progress-labels">
+            <span id="intro-status-phrase" class="intro-status-phrase">Initializing Design Archive...</span>
+            <span id="intro-counter-number" class="intro-counter-number">00%</span>
+          </div>
+          <div class="intro-progress-track">
+            <div id="intro-progress-fill" class="intro-progress-fill"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Coordinate Tape -->
+      <div class="intro-bottom-tape">
+        <span>TIRUCHIRAPPALLI, TN</span>
+        <span>&bull;</span>
+        <span>TAMIL–ENGLISH TYPOGRAPHY</span>
+        <span>&bull;</span>
+        <span>AUTHENTIC LOCAL BRANDS</span>
+      </div>
+
+    </div>
+  </aside>
 
   <!-- Vertical running metadata along page border -->
   <div class="edge-metadata">
@@ -155,7 +512,7 @@
               <div class="portrait-treatment-b">
                 <div class="outline-circle-b"></div>
                 <div class="backdrop-shape-b"></div>
-                <img src="./assets/images/rsg.jpg?v=dev" alt="Deva - Graphic Designer Portrait" class="subject-image-b motion-image">
+                <img src="./assets/images/deva_cutout.png?v=hero_large_20261019" alt="Deva - Graphic Designer Portrait" class="subject-image-b motion-image">
                 <div class="editorial-stamp-b">
                   <span class="circle-arrow">&gt;</span>
                   <span>DEVASENATHIPATHI M // 2026</span>
@@ -177,7 +534,7 @@
                   <span class="confetti-dot navy" style="width: 16px; height: 16px; bottom: 40px; right: 50px;"></span>
                   <span class="confetti-dot yellow" style="width: 22px; height: 22px; bottom: 30px; left: 60px;"></span>
                 </div>
-                <img src="./assets/images/rsg.jpg?v=dev" alt="Deva - Graphic Designer Sticker Portrait" class="subject-image-a motion-image">
+                <img src="./assets/images/deva_cutout.png?v=hero_large_20261019" alt="Deva - Graphic Designer Sticker Portrait" class="subject-image-a motion-image">
               </div>
 
             </div>
