@@ -4,10 +4,34 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Deva — Graphic Designer | Portfolio & Visual System</title>
-  <meta name="description" content="Portfolio of Deva, a graphic designer who makes brands that feel local and look sharp. Visual Communication student based in Coimbatore.">
-  
+  <meta name="description" content="Portfolio of Deva (Devasenathipathi M) — Graphic designer specializing in brand identity, bilingual typography, poster layout, and visual marketing systems.">
+  <link rel="canonical" href="https://www.devs-portfolio.online/">
+
+  <!-- Open Graph / Facebook / LinkedIn / WhatsApp -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Deva — Graphic Designer | Portfolio & Visual System">
+  <meta property="og:description" content="Portfolio of Deva (Devasenathipathi M) — Graphic designer specializing in brand identity, bilingual typography, poster layout, and visual marketing systems.">
+  <meta property="og:url" content="https://www.devs-portfolio.online/">
+  <meta property="og:site_name" content="Deva — Graphic Designer">
+  <meta property="og:image" content="https://www.devs-portfolio.online/assets/images/og-share-card.png">
+  <meta property="og:image:alt" content="Deva — Graphic Designer Portfolio & Visual System">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Deva — Graphic Designer | Portfolio & Visual System">
+  <meta name="twitter:description" content="Portfolio of Deva (Devasenathipathi M) — Graphic designer specializing in brand identity, bilingual typography, poster layout, and visual marketing systems.">
+  <meta name="twitter:image" content="https://www.devs-portfolio.online/assets/images/og-share-card.png">
+  <meta name="twitter:image:alt" content="Deva — Graphic Designer Portfolio & Visual System">
+
+  <!-- Favicons & App Icons -->
+  <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
+  <link rel="icon" type="image/png" sizes="48x48" href="./assets/favicon-48x48.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png">
+
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="./css/style.css?v=20261019_v4">
+  <link rel="stylesheet" href="./css/style.css?v=20261019_v5">
   
   <!-- Critical Intro Styling (guarantees instant zero-flicker render on load) -->
   <style>
@@ -299,10 +323,57 @@
   </style>
   
   <!-- Motion Script (Defer, quiet and minimal system) -->
-  <script src="./js/motion.js?v=20261019_v4" defer></script>
-  
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%23FFB914'/><text x='50%' y='68%' font-family='sans-serif' font-weight='900' font-size='56' fill='%23333333' text-anchor='middle'>D</text></svg>">
+  <script src="./js/motion.js?v=20261019_v5" defer></script>
+
+  <!-- Structured Data (JSON-LD Schema.org) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://www.devs-portfolio.online/#website",
+        "url": "https://www.devs-portfolio.online/",
+        "name": "Deva",
+        "description": "Portfolio and Visual System of Graphic Designer Deva (Devasenathipathi M)"
+      },
+      {
+        "@type": "ProfilePage",
+        "@id": "https://www.devs-portfolio.online/#profilepage",
+        "url": "https://www.devs-portfolio.online/",
+        "name": "Deva — Graphic Designer | Portfolio & Visual System",
+        "isPartOf": {
+          "@id": "https://www.devs-portfolio.online/#website"
+        },
+        "mainEntity": {
+          "@id": "https://www.devs-portfolio.online/#person"
+        }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://www.devs-portfolio.online/#person",
+        "name": "Devasenathipathi M",
+        "alternateName": "Deva",
+        "jobTitle": "Graphic Designer",
+        "url": "https://www.devs-portfolio.online/",
+        "image": "https://www.devs-portfolio.online/assets/images/deva-cutout.png",
+        "description": "Creative graphic designer combining visual identity systems, bilingual Tamil–English typography, and digital marketing strategies.",
+        "knowsAbout": [
+          "Brand Identity",
+          "Logo Design",
+          "Tamil-English Typography",
+          "Poster & Print Layout",
+          "Procreate Hand Illustration",
+          "Visual Marketing Systems"
+        ],
+        "sameAs": [
+          "https://www.linkedin.com/in/devasenathipathi-m-0488b9307",
+          "https://github.com/devx07-tech"
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -342,10 +413,10 @@
         <!-- Chunky Kinetic Title -->
         <div class="intro-text-block">
           <span class="intro-subtitle">PORTFOLIO &bull; VISUAL IDENTITY</span>
-          <h1 class="intro-main-title">
+          <div class="intro-main-title" role="presentation">
             <span>GRAPHIC</span>
             <span class="intro-highlight-text">DESIGNER.</span>
-          </h1>
+          </div>
           <p class="intro-designer-name">Devasenathipathi M &bull; Brand &bull; Typography &bull; Systems</p>
         </div>
 
@@ -512,7 +583,7 @@
               <div class="portrait-treatment-b">
                 <div class="outline-circle-b"></div>
                 <div class="backdrop-shape-b"></div>
-                <img src="./assets/images/deva_cutout.png?v=hero_large_20261019" alt="Deva - Graphic Designer Portrait" class="subject-image-b motion-image">
+                <img src="./assets/images/deva-cutout.png?v=20261019" alt="Devasenathipathi M (Deva) — Graphic Designer" width="1254" height="1254" fetchpriority="high" class="subject-image-b motion-image">
                 <div class="editorial-stamp-b">
                   <span class="circle-arrow">&gt;</span>
                   <span>DEVASENATHIPATHI M // 2026</span>
@@ -534,7 +605,7 @@
                   <span class="confetti-dot navy" style="width: 16px; height: 16px; bottom: 40px; right: 50px;"></span>
                   <span class="confetti-dot yellow" style="width: 22px; height: 22px; bottom: 30px; left: 60px;"></span>
                 </div>
-                <img src="./assets/images/deva_cutout.png?v=hero_large_20261019" alt="Deva - Graphic Designer Sticker Portrait" class="subject-image-a motion-image">
+                <img src="./assets/images/deva-cutout.png?v=20261019" alt="Devasenathipathi M (Deva) — Graphic Designer Portrait" width="1254" height="1254" class="subject-image-a motion-image">
               </div>
 
             </div>
@@ -574,7 +645,7 @@
                 <div class="project-badge-overlay">
                   <span class="project-type-tag">Type: Real client</span>
                 </div>
-                <img src="./assets/images/kaapi_kadai.jpg" alt="Kaapi Kadai brand identity design including kraft coffee cups, bilingual menu board, and matchbox labels" class="motion-image">
+                <img src="./assets/images/kaapi-kadai.jpg" alt="Kaapi Kadai brand identity design including kraft coffee cups, bilingual menu board, and matchbox labels" width="1200" height="896" loading="lazy" class="motion-image">
                 <div class="project-zoom-hint">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
                   <span>Click to view details</span>
@@ -625,7 +696,7 @@
                 <div class="project-badge-overlay">
                   <span class="project-type-tag self-init">Type: Self-initiated</span>
                 </div>
-                <img src="./assets/images/margazhi_posters.jpg" alt="Margazhi Season poster series showing three screenprint posters for Veena, Nadaswaram, and Mridangam" class="motion-image">
+                <img src="./assets/images/margazhi-posters.jpg" alt="Margazhi Season poster series showing three screenprint posters for Veena, Nadaswaram, and Mridangam" width="1200" height="896" loading="lazy" class="motion-image">
                 <div class="project-zoom-hint">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
                   <span>Click to view details</span>
@@ -696,7 +767,7 @@
             <!-- Left Col: Photo & Matchbox Label Story -->
             <div class="about-media-stack">
               <div class="about-photo-wrapper">
-                <img src="./assets/images/rsg.jpg?v=dev" alt="Deva in studio working on graphic design" class="motion-image">
+                <img src="./assets/images/deva-in-studio.jpg" alt="Devasenathipathi M in design studio workspace" width="1254" height="1254" loading="lazy" class="motion-image">
                 <div class="about-photo-badge">Tiruchirappalli &bull; Gandhipuram Roots</div>
               </div>
 
@@ -706,7 +777,7 @@
                   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#333333" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="7" y1="8" x2="17" y2="8"/><line x1="7" y1="12" x2="13" y2="12"/><circle cx="16" cy="14" r="2" fill="#FFB914"/></svg>
                 </div>
                 <div class="matchbox-text">
-                  <h5>Ink, Paper &amp; Matchbox Labels</h5>
+                  <h3 class="about-card-title">Ink, Paper &amp; Matchbox Labels</h3>
                   <p>Grew up around my grandfather's printing press. Outside design I play the veena and collect vintage matchbox labels.</p>
                 </div>
               </div>
@@ -904,9 +975,9 @@
 
         <!-- Software Toolkit Grid (From Reference 1 & 2) -->
         <div class="software-toolkit-block">
-          <h4 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem;">
+          <h3 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem;">
             <span class="marker-highlight">Software</span> &amp; Creative Tools
-          </h4>
+          </h3>
           <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.25rem;">
             Tools used across identity, print layout, vector drawing, and marketing design workflows.
           </p>

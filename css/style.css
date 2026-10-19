@@ -1480,6 +1480,7 @@ button {
   flex-shrink: 0;
 }
 
+.matchbox-text h3,
 .matchbox-text h5 {
   font-family: var(--font-heading);
   font-size: 0.95rem;

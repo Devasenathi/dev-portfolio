@@ -182,7 +182,7 @@ const projectData = {
     title: 'Kaapi Kadai: brand identity for a filter-coffee shop',
     type: 'Real client',
     role: 'Solo designer',
-    img: './assets/images/kaapi_kadai.jpg',
+    img: './assets/images/kaapi-kadai.jpg',
     desc: 'Designed the logo, a bilingual Tamil–English menu board, cup sleeves and an Instagram post template for a small coffee shop near my college. I sketched about 30 logo ideas on paper, showed the owner three, and refined the one he chose.',
     learning: 'The owner now uses the menu board and cup sleeves in the shop. I learned how to design for print at very small sizes, and how to make Tamil and English text feel equal instead of one looking like an afterthought.'
   },
@@ -190,7 +190,7 @@ const projectData = {
     title: 'Margazhi Season poster series',
     type: 'Self-initiated',
     role: 'Designer and illustrator',
-    img: './assets/images/margazhi_posters.jpg',
+    img: './assets/images/margazhi-posters.jpg',
     desc: 'Made a series of three posters for the December music season, one each for veena, nadaswaram and mridangam. I hand-drew each instrument in Procreate and paired it with a bold Tamil headline that I lettered myself.',
     learning: 'I learned how to keep a series consistent with one grid, one colour rule and one type pair, while still letting each poster feel different.'
   }
